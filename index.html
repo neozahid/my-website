@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Zahid Akhtar | Learn HTML, CSS, Java, Photoshop & Excel</title>
   <style>
-    body {
-      background-color: lightblue;
-    }
     * {
       box-sizing: border-box;
       margin: 0;
@@ -26,6 +23,7 @@
       color: #fff;
       text-align: center;
       padding: 2rem 1rem;
+      position: relative;
     }
 
     header h1 {
@@ -41,6 +39,81 @@
       margin: 0 1rem;
       text-decoration: none;
       font-weight: bold;
+    }
+
+    .settings-btn {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: #0b3d91;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .settings-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      padding: 1rem;
+      z-index: 1000;
+    }
+
+    .settings-panel.active {
+      display: block;
+    }
+
+    .settings-panel h3 {
+      margin-bottom: 1rem;
+      color: #0b3d91;
+    }
+
+    .settings-panel label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .settings-panel input[type="file"],
+    .settings-panel input[type="text"],
+    .settings-panel input[type="password"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .settings-panel button {
+      padding: 0.5rem 1rem;
+      background: #0b3d91;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
+    .settings-options {
+      margin-top: 1rem;
+    }
+
+    .settings-options button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
+
+    .back-btn {
+      background: #555;
     }
 
     section {
@@ -112,12 +185,18 @@
       color: #fff;
       margin-top: 2rem;
     }
+
+    #success-message {
+      margin-top: 1rem;
+      text-align: center;
+    }
   </style>
 </head>
-<body style="background-color: lightblue;">
+<body>
 
   <header>
-    <img src="unnamed.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
+    <button class="settings-btn" onclick="toggleSettings()">Settings</button>
+    <img id="profilePic" src="c:\Users\CHS-13\Documents\zahid image\unnamed.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
     <h1>Zahid Akhtar</h1>
     <p>Learn HTML, CSS, Java, Photoshop & Excel Mastery</p>
     <nav>
@@ -126,6 +205,29 @@
       <a href="#contact">Contact</a>
     </nav>
   </header>
+
+  <div class="settings-panel" id="settingsPanel">
+    <h3>Settings</h3>
+    <div>
+      <label for="profilePicture">Change Profile Picture</label>
+      <input type="file" id="profilePicture" accept="image/*">
+      <button onclick="updateProfilePicture()">Update Picture</button>
+    </div>
+    <div>
+      <h4>Create Your Account</h4>
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter username" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter password" required>
+      <button onclick="createAccount()">Create Account</button>
+    </div>
+    <div class="settings-options">
+      <h4>Other Options</h4>
+      <button onclick="toggleTheme()">Toggle Theme</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+    <button class="back-btn" onclick="toggleSettings()">Back</button>
+  </div>
 
   <section id="about">
     <h2>About Me</h2>
@@ -141,7 +243,7 @@
       <p>Build the structure of websites using HTML tags, forms, tables, and semantic layouts.</p>
       <button onclick="toggleDetails('htmlDetails')">Click here </button>
       <div class="details" id="htmlDetails">
-        <img src="1714546382493.jpg" alt="HTML Course Image" style="width: 130px; height: 130px; border-radius: 50%;">
+        <img src="c:\Users\CHS-13\Documents\zahid image\IMG_20250607_111152_0202.jpg" alt="HTML Course Image" style="width: 130px; height: 130px; border-radius: 50%;">
         <p style="font-size: 20px; shape-margin: 50px;">Follow this link to learn in detail </p>
         <a href="https://www.w3schools.com/" target="_blank">w3schools</a>
       </div>
@@ -150,7 +252,7 @@
     <!-- CSS Course -->
     <div class="course">
       <h3>CSS</h3>
-      <p>Follow this link to stylye your web such as background color, font size,font color and so on</p>
+      <p>Follow this link to style your web such as background color, font size, font color and so on</p>
       <button onclick="toggleDetails('cssDetails')" style="font-weight: 100;">click here </button>
       <div class="details" id="cssDetails">
         <img src="c:\Users\CHS-13\Documents\zahid image\1714546382493.jpg" alt="CSS Course Image" style="width: 130px; height: 130px; border-radius: 50%;">
@@ -199,18 +301,64 @@
   <section id="contact">
     <h2>Contact Me</h2>
     <form id="contactForm">
-      <input type="text" id="name" placeholder="name" required />
-      <input type="email" id="email" placeholder="email" required />
-      <textarea id="message" placeholder="massege" required></textarea>
+      <input type="text" id="name" name="from_name" placeholder="YOUR_NAME" required />
+      <input type="email" id="email" name="from_email" placeholder="YOUR_EMAIL" required />
+      <textarea id="message" name="message" placeholder="YOUR_MESSAGE" required></textarea>
       <button type="submit">Send Message</button>
     </form>
+    <div id="success-message"></div>
   </section>
 
   <footer>
-    <p>&copy; 2025 Zahid Akhtar. All rights reserved.</p>
+    <p>© 2025 Zahid Akhtar. All rights reserved.</p>
   </footer>
 
   <script>
+    function toggleSettings() {
+      const settingsPanel = document.getElementById('settingsPanel');
+      settingsPanel.classList.toggle('active');
+    }
+
+    function updateProfilePicture() {
+      const input = document.getElementById('profilePicture');
+      const profilePic = document.getElementById('profilePic');
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          profilePic.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert('Please select an image file.');
+      }
+    }
+
+    function createAccount() {
+      const username = document.getElementById('username').value;
+      const
+
+ password = document.getElementById('password').value;
+      if (username && password) {
+        alert('Account creation submitted for: ' + username);
+        // Note: Actual account creation requires backend integration
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+      } else {
+        alert('Please fill in both username and password.');
+      }
+    }
+
+    function toggleTheme() {
+      document.body.style.background = document.body.style.background === '#f7f7f7' ? '#333' : '#f7f7f7';
+      document.body.style.color = document.body.style.color === '#333' ? '#fff' : '#333';
+    }
+
+    function logout() {
+      alert('Logged out successfully.');
+      // Note: Actual logout requires backend session handling
+    }
+
     function toggleDetails(id) {
       const details = document.getElementById(id);
       details.style.display = details.style.display === 'block' ? 'none' : 'block';
@@ -218,7 +366,6 @@
 
     document.getElementById("contactForm").addEventListener("submit", function(e) {
       e.preventDefault();
-
       emailjs.sendForm("service_lt224p3", "template_f3c9q2o", this)
         .then(function(response) {
           const userEmail = document.querySelector("input[name='from_email']").value;
