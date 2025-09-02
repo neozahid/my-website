@@ -1,169 +1,1708 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zahid Akhtar | Learn HTML, CSS, Java, Photoshop & Excel</title>
-
-  <!-- ✅ EmailJS SDK -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    // 🔐 Replace this with your actual public key from EmailJS dashboard
-    emailjs.init("Qyre697Z6U3MVIQjo");
-  </script>
-
-  <style>
-    /* Your CSS code remains unchanged (omitted here for brevity) */
-    body {
-      background: #f7f7f7;
-      color: #333;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-    }
-    /* Add your remaining CSS styles here (same as your code above) */
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliffside Fighters - Ultimate Battle Arena</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  <!-- Header Section -->
-  <header>
-    <button class="settings-btn" onclick="toggleSettings()">Settings</button>
-    <img id="profilePic" src="https://via.placeholder.com/150" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
-    <h1>Zahid Akhtar</h1>
-    <p>Learn HTML, CSS, Java, Photoshop & Excel Mastery</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#courses">Courses</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: white;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-  <!-- Settings Panel -->
-  <div class="settings-panel" id="settingsPanel">
-    <h3>Settings</h3>
-    <div>
-      <label for="profilePicture">Change Profile Picture</label>
-      <input type="file" id="profilePicture" accept="image/*">
-      <button onclick="updateProfilePicture()">Update Picture</button>
+        .game-container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e;
+            color: #ffbe0b;
+            letter-spacing: 3px;
+        }
+
+        .mode-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .mode-title {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #ffbe0b;
+            text-shadow: 0 0 15px #ff006e;
+        }
+
+        .mode-options {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .mode-btn {
+            background: linear-gradient(135deg, #ffbe0b, #fb5607);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 190, 11, 0.5);
+        }
+
+        .mode-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 190, 11, 0.8);
+        }
+
+        .mode-btn.pvp {
+            background: linear-gradient(135deg, #3a86ff, #8338ec);
+        }
+
+        .mode-description {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        .difficulty-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .difficulty-title {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #ffbe0b;
+            text-shadow: 0 0 15px #ff006e;
+        }
+
+        .difficulty-options {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .difficulty-btn {
+            background: linear-gradient(135deg, #ffbe0b, #fb5607);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 190, 11, 0.5);
+        }
+
+        .difficulty-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 190, 11, 0.8);
+        }
+
+        .difficulty-btn.easy {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .difficulty-btn.medium {
+            background: linear-gradient(135deg, #ffbe0b, #fb5607);
+        }
+
+        .difficulty-btn.hard {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        .difficulty-description {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+
+        .player-info {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            width: 45%;
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.5);
+        }
+
+        .player-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .health-bar-container {
+            height: 25px;
+            background: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            border: 2px solid #444;
+        }
+
+        .health-bar {
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+        }
+
+        .player1-health {
+            background: linear-gradient(90deg, #ffbe0b, #fb5607);
+        }
+
+        .player2-health {
+            background: linear-gradient(90deg, #3a86ff, #8338ec);
+        }
+
+        .energy-bar-container {
+            height: 15px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #444;
+        }
+
+        .energy-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .player1-energy {
+            background: linear-gradient(90deg, #ff9a00, #ff006e);
+        }
+
+        .player2-energy {
+            background: linear-gradient(90deg, #00d9ff, #0099ff);
+        }
+
+        .game-arena {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(180deg, #87CEEB, #4682B4);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(180deg, #87CEEB, #B0E2FF);
+            z-index: 1;
+        }
+
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 20px;
+            left: 100px;
+        }
+
+        .cloud2 {
+            width: 150px;
+            height: 50px;
+            top: 40px;
+            right: 150px;
+        }
+
+        .cloud3 {
+            width: 80px;
+            height: 30px;
+            top: 70px;
+            left: 300px;
+        }
+
+        .cliff-left {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            clip-path: polygon(0 100%, 100% 50%, 100% 100%);
+            z-index: 2;
+        }
+
+        .cliff-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            height: 350px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            clip-path: polygon(0 100%, 0 40%, 100% 100%);
+            z-index: 2;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(180deg, #8B4513, #654321);
+            z-index: 3;
+        }
+
+        .platform {
+            position: absolute;
+            background: linear-gradient(180deg, #A0522D, #8B4513);
+            border-radius: 10px;
+            z-index: 4;
+        }
+
+        .platform1 {
+            width: 200px;
+            height: 20px;
+            bottom: 150px;
+            left: 200px;
+        }
+
+        .platform2 {
+            width: 200px;
+            height: 20px;
+            bottom: 200px;
+            right: 200px;
+        }
+
+        .tree {
+            position: absolute;
+            z-index: 5;
+        }
+
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            width: 20px;
+            height: 80px;
+            background: linear-gradient(180deg, #8B4513, #654321);
+            border-radius: 5px;
+        }
+
+        .tree-leaves {
+            position: absolute;
+            bottom: 60px;
+            width: 60px;
+            height: 80px;
+            background: radial-gradient(ellipse at center, #2E8B57, #228B22);
+            border-radius: 50%;
+        }
+
+        .tree1 {
+            left: 50px;
+            bottom: 80px;
+        }
+
+        .tree2 {
+            right: 80px;
+            bottom: 80px;
+        }
+
+        .rock {
+            position: absolute;
+            background: linear-gradient(135deg, #696969, #808080);
+            border-radius: 30%;
+            z-index: 4;
+        }
+
+        .rock1 {
+            width: 60px;
+            height: 40px;
+            bottom: 80px;
+            left: 400px;
+        }
+
+        .rock2 {
+            width: 80px;
+            height: 50px;
+            bottom: 80px;
+            right: 400px;
+        }
+
+        .fighter {
+            position: absolute;
+            bottom: 80px;
+            width: 60px;
+            height: 150px;
+            z-index: 10;
+            transition: all 0.1s ease;
+        }
+
+        .player1 {
+            left: 150px;
+        }
+
+        .player2 {
+            right: 150px;
+        }
+
+        .fighter-head {
+            position: absolute;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            left: 10px;
+        }
+
+        .player1 .fighter-head {
+            background: linear-gradient(135deg, #FDBCB4, #F5DEB3);
+        }
+
+        .player2 .fighter-head {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+        }
+
+        .fighter-hair {
+            position: absolute;
+            top: -5px;
+            width: 40px;
+            height: 20px;
+            border-radius: 50% 50% 0 0;
+            left: 0;
+        }
+
+        .player1 .fighter-hair {
+            background: #FFD700;
+        }
+
+        .player2 .fighter-hair {
+            background: #000;
+        }
+
+        .fighter-eyes {
+            position: absolute;
+            top: 15px;
+            width: 30px;
+            height: 10px;
+            left: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .eye {
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .fighter-torso {
+            position: absolute;
+            top: 40px;
+            width: 40px;
+            height: 60px;
+            left: 10px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .player1 .fighter-torso {
+            background: linear-gradient(135deg, #1E90FF, #0000CD);
+        }
+
+        .player2 .fighter-torso {
+            background: linear-gradient(135deg, #DC143C, #8B0000);
+        }
+
+        .fighter-arms {
+            position: absolute;
+            top: 45px;
+            width: 100%;
+            height: 10px;
+        }
+
+        .arm {
+            position: absolute;
+            width: 15px;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        .player1 .arm {
+            background: linear-gradient(135deg, #FDBCB4, #F5DEB3);
+        }
+
+        .player2 .arm {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+        }
+
+        .left-arm {
+            left: -5px;
+            transform-origin: top center;
+        }
+
+        .right-arm {
+            right: -5px;
+            transform-origin: top center;
+        }
+
+        .fighter-legs {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            height: 50px;
+            left: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .leg {
+            width: 15px;
+            height: 50px;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .player1 .leg {
+            background: linear-gradient(135deg, #4169E1, #0000CD);
+        }
+
+        .player2 .leg {
+            background: linear-gradient(135deg, #8B0000, #DC143C);
+        }
+
+        .attack-effect {
+            position: absolute;
+            width: 80px;
+            height: 30px;
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 15;
+        }
+
+        .player1-attack {
+            background: radial-gradient(ellipse at center, rgba(30, 144, 255, 0.8), rgba(0, 0, 205, 0));
+            box-shadow: 0 0 15px #1E90FF;
+        }
+
+        .player2-attack {
+            background: radial-gradient(ellipse at center, rgba(220, 20, 60, 0.8), rgba(139, 0, 0, 0));
+            box-shadow: 0 0 15px #DC143C;
+        }
+
+        .special-effect {
+            position: absolute;
+            width: 150px;
+            height: 50px;
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 15;
+        }
+
+        .player1-special {
+            background: radial-gradient(ellipse at center, rgba(0, 191, 255, 0.9), rgba(0, 0, 139, 0));
+            box-shadow: 0 0 25px #00BFFF;
+        }
+
+        .player2-special {
+            background: radial-gradient(ellipse at center, rgba(255, 69, 0, 0.9), rgba(139, 0, 0, 0));
+            box-shadow: 0 0 25px #FF4500;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+
+        .control-group {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            width: 45%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .control-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ffbe0b;
+        }
+
+        .control-keys {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .key {
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 8px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .special-move {
+            background: #444;
+            border: 1px solid #777;
+            border-radius: 5px;
+            padding: 8px;
+            margin-top: 10px;
+            color: #ffbe0b;
+        }
+
+        .game-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 2rem;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.8);
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #ffbe0b, #fb5607);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 190, 11, 0.5);
+        }
+
+        .restart-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 190, 11, 0.8);
+        }
+
+        .countdown {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffbe0b;
+            text-shadow: 0 0 10px #ff006e;
+            z-index: 50;
+        }
+
+        .hit-effect {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,0,0.8), rgba(255,165,0,0));
+            opacity: 0;
+            z-index: 20;
+        }
+
+        .jump-effect {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            height: 10px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.5), rgba(255,255,255,0));
+            opacity: 0;
+            z-index: 5;
+        }
+
+        .ai-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 50;
+        }
+
+        .ai-easy {
+            color: #4CAF50;
+        }
+
+        .ai-medium {
+            color: #ffbe0b;
+        }
+
+        .ai-hard {
+            color: #f44336;
+        }
+
+        .mode-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 50;
+        }
+
+        .mode-pvp {
+            color: #3a86ff;
+        }
+
+        .mode-pve {
+            color: #ffbe0b;
+        }
+
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 2.5rem;
+            }
+            
+            .game-arena {
+                height: 400px;
+            }
+            
+            .fighter {
+                width: 50px;
+                height: 120px;
+            }
+            
+            .fighter-head {
+                width: 30px;
+                height: 30px;
+                left: 10px;
+            }
+            
+            .fighter-torso {
+                width: 30px;
+                height: 50px;
+                left: 10px;
+                top: 30px;
+            }
+            
+            .fighter-legs {
+                width: 30px;
+                height: 40px;
+                left: 10px;
+            }
+            
+            .arm {
+                width: 12px;
+                height: 30px;
+            }
+            
+            .left-arm {
+                left: -5px;
+            }
+            
+            .right-arm {
+                right: -5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mode-screen" id="mode-screen">
+        <h2 class="mode-title">SELECT GAME MODE</h2>
+        <div class="mode-options">
+            <button class="mode-btn" onclick="selectMode('pve')">PLAYER VS AI</button>
+            <button class="mode-btn pvp" onclick="selectMode('pvp')">PLAYER VS PLAYER</button>
+        </div>
+        <p class="mode-description">
+            Choose your game mode! Play against an AI opponent or challenge a friend in local multiplayer.
+        </p>
     </div>
-    <div>
-      <h4>Create Your Account</h4>
-      <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Enter username" required>
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Enter password" required>
-      <button onclick="createAccount()">Create Account</button>
-    </div>
-    <div class="settings-options">
-      <h4>Other Options</h4>
-      <button onclick="toggleTheme()">Toggle Theme</button>
-      <button onclick="logout()">Logout</button>
-    </div>
-    <button class="back-btn" onclick="toggleSettings()">Back</button>
-  </div>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hello! I’m <strong>Zahid Akhtar</strong>, a tech educator and mentor...</p>
-  </section>
-
-  <!-- Courses Section -->
-  <section id="courses">
-    <h2>Select Your Field</h2>
-    <div class="course">
-      <h3>HTML</h3>
-      <p>Build the structure of websites using HTML...</p>
-      <button onclick="toggleDetails('htmlDetails')">Click here</button>
-      <div class="details" id="htmlDetails">
-        <img src="https://via.placeholder.com/130" alt="HTML Course">
-        <p>Learn HTML in detail at:</p>
-        <a href="https://www.w3schools.com/" target="_blank">w3schools</a>
-      </div>
+    <div class="difficulty-screen" id="difficulty-screen" style="display: none;">
+        <h2 class="difficulty-title">SELECT DIFFICULTY</h2>
+        <div class="difficulty-options">
+            <button class="difficulty-btn easy" onclick="setDifficulty('easy')">EASY</button>
+            <button class="difficulty-btn medium" onclick="setDifficulty('medium')">MEDIUM</button>
+            <button class="difficulty-btn hard" onclick="setDifficulty('hard')">HARD</button>
+        </div>
+        <p class="difficulty-description">
+            Choose your challenge! Easy mode for beginners, Medium for balanced gameplay, and Hard for ultimate fighters.
+        </p>
     </div>
 
-    <!-- Add other course blocks as needed -->
-  </section>
+    <div class="game-container">
+        <h1 class="game-title">CLIFFSIDE FIGHTERS</h1>
+        
+        <div class="game-info">
+            <div class="player-info">
+                <div class="player-name" id="player1-name">BLUE WARRIOR</div>
+                <div class="health-bar-container">
+                    <div class="health-bar player1-health" id="player1-health"></div>
+                </div>
+                <div class="energy-bar-container">
+                    <div class="energy-bar player1-energy" id="player1-energy"></div>
+                </div>
+            </div>
+            
+            <div class="player-info">
+                <div class="player-name" id="player2-name">RED WARRIOR</div>
+                <div class="health-bar-container">
+                    <div class="health-bar player2-health" id="player2-health"></div>
+                </div>
+                <div class="energy-bar-container">
+                    <div class="energy-bar player2-energy" id="player2-energy"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-arena" id="game-arena">
+            <div class="mode-indicator" id="mode-indicator">MODE: <span id="game-mode">PvE</span></div>
+            <div class="ai-indicator" id="ai-indicator">AI: <span id="ai-level">MEDIUM</span></div>
+            
+            <div class="sky">
+                <div class="cloud cloud1"></div>
+                <div class="cloud cloud2"></div>
+                <div class="cloud cloud3"></div>
+            </div>
+            
+            <div class="cliff-left"></div>
+            <div class="cliff-right"></div>
+            
+            <div class="platform platform1"></div>
+            <div class="platform platform2"></div>
+            
+            <div class="tree tree1">
+                <div class="tree-trunk"></div>
+                <div class="tree-leaves"></div>
+            </div>
+            <div class="tree tree2">
+                <div class="tree-trunk"></div>
+                <div class="tree-leaves"></div>
+            </div>
+            
+            <div class="rock rock1"></div>
+            <div class="rock rock2"></div>
+            
+            <div class="ground"></div>
+            
+            <div class="fighter player1" id="player1">
+                <div class="fighter-head">
+                    <div class="fighter-hair"></div>
+                    <div class="fighter-eyes">
+                        <div class="eye"></div>
+                        <div class="eye"></div>
+                    </div>
+                </div>
+                <div class="fighter-torso"></div>
+                <div class="fighter-arms">
+                    <div class="arm left-arm"></div>
+                    <div class="arm right-arm"></div>
+                </div>
+                <div class="fighter-legs">
+                    <div class="leg"></div>
+                    <div class="leg"></div>
+                </div>
+                <div class="attack-effect player1-attack" id="player1-attack"></div>
+                <div class="special-effect player1-special" id="player1-special"></div>
+                <div class="hit-effect" id="player1-hit"></div>
+                <div class="jump-effect" id="player1-jump"></div>
+            </div>
+            
+            <div class="fighter player2" id="player2">
+                <div class="fighter-head">
+                    <div class="fighter-hair"></div>
+                    <div class="fighter-eyes">
+                        <div class="eye"></div>
+                        <div class="eye"></div>
+                    </div>
+                </div>
+                <div class="fighter-torso"></div>
+                <div class="fighter-arms">
+                    <div class="arm left-arm"></div>
+                    <div class="arm right-arm"></div>
+                </div>
+                <div class="fighter-legs">
+                    <div class="leg"></div>
+                    <div class="leg"></div>
+                </div>
+                <div class="attack-effect player2-attack" id="player2-attack"></div>
+                <div class="special-effect player2-special" id="player2-special"></div>
+                <div class="hit-effect" id="player2-hit"></div>
+                <div class="jump-effect" id="player2-jump"></div>
+            </div>
+            
+            <div class="countdown" id="countdown"></div>
+            <div class="game-message" id="game-message">
+                <div id="message-text"></div>
+                <button class="restart-btn" id="restart-btn">RESTART BATTLE</button>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <div class="control-title">BLUE WARRIOR CONTROLS</div>
+                <div class="control-keys">
+                    <div class="key">W</div>
+                    <div class="key">A</div>
+                    <div class="key">S</div>
+                    <div class="key">D</div>
+                    <div class="key">F</div>
+                    <div class="key">G</div>
+                </div>
+                <div class="special-move">Special: F+G</div>
+            </div>
+            
+            <div class="control-group" id="player2-controls">
+                <div class="control-title">RED WARRIOR CONTROLS</div>
+                <div class="control-keys">
+                    <div class="key">↑</div>
+                    <div class="key">←</div>
+                    <div class="key">↓</div>
+                    <div class="key">→</div>
+                    <div class="key">,</div>
+                    <div class="key">.</div>
+                </div>
+                <div class="special-move">Special: ,+.</div>
+            </div>
+        </div>
+    </div>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <form id="contactForm">
-      <input type="text" name="from_name" placeholder="YOUR NAME" required />
-      <input type="email" name="from_email" placeholder="YOUR EMAIL" required />
-      <textarea name="message" placeholder="YOUR MESSAGE" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <div id="success-message"></div>
-  </section>
-
-  <footer>
-    <p>© 2025 Zahid Akhtar. All rights reserved.</p>
-  </footer>
-
-  <!-- ✅ All JavaScript -->
-  <script>
-    function toggleSettings() {
-      const settingsPanel = document.getElementById('settingsPanel');
-      settingsPanel.classList.toggle('active');
-    }
-
-    function updateProfilePicture() {
-      const input = document.getElementById('profilePicture');
-      const profilePic = document.getElementById('profilePic');
-      const file = input.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          profilePic.src = e.target.result;
+    <script>
+        // Game variables
+        let gameMode = 'pve'; // 'pve' or 'pvp'
+        let difficulty = 'medium';
+        let aiSpeed = 100;
+        let aiDamageMultiplier = 1;
+        let aiAggression = 0.5;
+        let aiInterval;
+        
+        // Game elements
+        const player1Element = document.getElementById('player1');
+        const player2Element = document.getElementById('player2');
+        const player1HealthBar = document.getElementById('player1-health');
+        const player2HealthBar = document.getElementById('player2-health');
+        const player1EnergyBar = document.getElementById('player1-energy');
+        const player2EnergyBar = document.getElementById('player2-energy');
+        const player1Attack = document.getElementById('player1-attack');
+        const player2Attack = document.getElementById('player2-attack');
+        const player1Special = document.getElementById('player1-special');
+        const player2Special = document.getElementById('player2-special');
+        const player1Hit = document.getElementById('player1-hit');
+        const player2Hit = document.getElementById('player2-hit');
+        const player1Jump = document.getElementById('player1-jump');
+        const player2Jump = document.getElementById('player2-jump');
+        const gameMessage = document.getElementById('game-message');
+        const messageText = document.getElementById('message-text');
+        const restartBtn = document.getElementById('restart-btn');
+        const countdown = document.getElementById('countdown');
+        const gameArena = document.getElementById('game-arena');
+        const aiIndicator = document.getElementById('ai-indicator');
+        const aiLevel = document.getElementById('ai-level');
+        const modeIndicator = document.getElementById('mode-indicator');
+        const gameModeDisplay = document.getElementById('game-mode');
+        const player1Name = document.getElementById('player1-name');
+        const player2Name = document.getElementById('player2-name');
+        const player2Controls = document.getElementById('player2-controls');
+        
+        // Game state
+        let gameState = {
+            player1: {
+                health: 100,
+                energy: 100,
+                position: 150,
+                isAttacking: false,
+                isJumping: false,
+                isSpecialAttacking: false,
+                onPlatform: false
+            },
+            player2: {
+                health: 100,
+                energy: 100,
+                position: gameArena.offsetWidth - 210,
+                isAttacking: false,
+                isJumping: false,
+                isSpecialAttacking: false,
+                onPlatform: false
+            },
+            gameActive: false,
+            countdown: 3
         };
-        reader.readAsDataURL(file);
-      } else {
-        alert('Please select an image file.');
-      }
-    }
-
-    function createAccount() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      if (username && password) {
-        alert('Account creation submitted for: ' + username);
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
-      } else {
-        alert('Please fill in both username and password.');
-      }
-    }
-
-    function toggleTheme() {
-      document.body.style.background = document.body.style.background === '#f7f7f7' ? '#333' : '#f7f7f7';
-      document.body.style.color = document.body.style.color === '#333' ? '#fff' : '#333';
-    }
-
-    function logout() {
-      alert('Logged out successfully.');
-    }
-
-    function toggleDetails(id) {
-      const details = document.getElementById(id);
-      details.style.display = details.style.display === 'block' ? 'none' : 'block';
-    }
-
-    // ✅ Contact Form Submission via EmailJS
-    document.getElementById("contactForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      emailjs.sendForm("service_Idu6xda", "template_fwz9rhq", this)
-        .then(function(response) {
-          const userEmail = document.querySelector("input[name='from_email']").value;
-          document.getElementById("success-message").textContent = "✅ Message sent! We'll reply to: " + userEmail;
-          document.getElementById("contactForm").reset();
-        }, function(error) {
-          document.getElementById("success-message").textContent = "❌ Error sending message. Please try again.";
-          console.error("EmailJS Error:", error);
+        
+        // Platform positions
+        const platform1 = {
+            left: 200,
+            right: 400,
+            top: 330,
+            bottom: 350
+        };
+        
+        const platform2 = {
+            left: gameArena.offsetWidth - 400,
+            right: gameArena.offsetWidth - 200,
+            top: 280,
+            bottom: 300
+        };
+        
+        // Select game mode
+        function selectMode(mode) {
+            gameMode = mode;
+            
+            if (mode === 'pve') {
+                document.getElementById('difficulty-screen').style.display = 'flex';
+                document.getElementById('mode-screen').style.display = 'none';
+                player2Name.textContent = 'AI WARRIOR';
+                gameModeDisplay.textContent = 'PvE';
+                modeIndicator.className = 'mode-indicator mode-pve';
+            } else {
+                document.getElementById('mode-screen').style.display = 'none';
+                player2Name.textContent = 'RED WARRIOR';
+                gameModeDisplay.textContent = 'PvP';
+                modeIndicator.className = 'mode-indicator mode-pvp';
+                aiIndicator.style.display = 'none';
+                initializeGame();
+            }
+        }
+        
+        // Set difficulty
+        function setDifficulty(level) {
+            difficulty = level;
+            
+            switch(level) {
+                case 'easy':
+                    aiSpeed = 150;
+                    aiDamageMultiplier = 0.8;
+                    aiAggression = 0.3;
+                    aiLevel.textContent = 'EASY';
+                    aiIndicator.className = 'ai-indicator ai-easy';
+                    break;
+                case 'medium':
+                    aiSpeed = 100;
+                    aiDamageMultiplier = 1;
+                    aiAggression = 0.5;
+                    aiLevel.textContent = 'MEDIUM';
+                    aiIndicator.className = 'ai-indicator ai-medium';
+                    break;
+                case 'hard':
+                    aiSpeed = 50;
+                    aiDamageMultiplier = 1.5;
+                    aiAggression = 0.8;
+                    aiLevel.textContent = 'HARD';
+                    aiIndicator.className = 'ai-indicator ai-hard';
+                    break;
+            }
+            
+            document.getElementById('difficulty-screen').style.display = 'none';
+            initializeGame();
+        }
+        
+        // Initialize game
+        function initializeGame() {
+            // Initialize health and energy bars
+            player1HealthBar.style.width = '100%';
+            player2HealthBar.style.width = '100%';
+            player1EnergyBar.style.width = '100%';
+            player2EnergyBar.style.width = '100%';
+            
+            // Start countdown
+            startCountdown();
+            
+            // Start AI if in PvE mode
+            if (gameMode === 'pve') {
+                startAI();
+            }
+        }
+        
+        // Start countdown
+        function startCountdown() {
+            gameState.countdown = 3;
+            countdown.textContent = gameState.countdown;
+            countdown.style.display = 'block';
+            
+            const countInterval = setInterval(() => {
+                gameState.countdown--;
+                if (gameState.countdown > 0) {
+                    countdown.textContent = gameState.countdown;
+                } else if (gameState.countdown === 0) {
+                    countdown.textContent = 'FIGHT!';
+                } else {
+                    countdown.style.display = 'none';
+                    gameState.gameActive = true;
+                    clearInterval(countInterval);
+                }
+            }, 1000);
+        }
+        
+        // Player controls
+        const keys = {};
+        
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+            
+            if (!gameState.gameActive) return;
+            
+            // Player 1 controls
+            if (e.key === 'a' || e.key === 'A') {
+                movePlayer1('left');
+            }
+            if (e.key === 'd' || e.key === 'D') {
+                movePlayer1('right');
+            }
+            if (e.key === 'w' || e.key === 'W') {
+                jumpPlayer1();
+            }
+            if (e.key === 's' || e.key === 'S') {
+                attackPlayer1();
+            }
+            if (e.key === 'f' || e.key === 'F') {
+                if (keys['g'] || keys['G']) {
+                    specialAttackPlayer1();
+                }
+            }
+            if (e.key === 'g' || e.key === 'G') {
+                if (keys['f'] || keys['F']) {
+                    specialAttackPlayer1();
+                }
+            }
+            
+            // Player 2 controls (only in PvP mode)
+            if (gameMode === 'pvp') {
+                if (e.key === 'ArrowLeft') {
+                    movePlayer2('left');
+                }
+                if (e.key === 'ArrowRight') {
+                    movePlayer2('right');
+                }
+                if (e.key === 'ArrowUp') {
+                    jumpPlayer2();
+                }
+                if (e.key === 'ArrowDown') {
+                    attackPlayer2();
+                }
+                if (e.key === ',') {
+                    if (keys['.']) {
+                        specialAttackPlayer2();
+                    }
+                }
+                if (e.key === '.') {
+                    if (keys[',']) {
+                        specialAttackPlayer2();
+                    }
+                }
+            }
         });
-    });
-  </script>
+        
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+        
+        // Player 1 functions
+        function movePlayer1(direction) {
+            if (gameState.player1.isAttacking || gameState.player1.isSpecialAttacking) return;
+            
+            const currentPos = parseInt(player1Element.style.left || '150px');
+            const newPos = direction === 'left' ? Math.max(0, currentPos - 20) : Math.min(gameArena.offsetWidth - 60, currentPos + 20);
+            
+            player1Element.style.left = newPos + 'px';
+            gameState.player1.position = newPos;
+            
+            checkPlatform('player1');
+            checkPlayerDirection();
+        }
+        
+        function jumpPlayer1() {
+            if (gameState.player1.isJumping || gameState.player1.isAttacking || gameState.player1.isSpecialAttacking) return;
+            
+            gameState.player1.isJumping = true;
+            player1Element.style.bottom = '180px';
+            
+            player1Jump.style.opacity = '1';
+            setTimeout(() => {
+                player1Jump.style.opacity = '0';
+            }, 300);
+            
+            setTimeout(() => {
+                player1Element.style.bottom = '80px';
+                setTimeout(() => {
+                    gameState.player1.isJumping = false;
+                    checkPlatform('player1');
+                }, 300);
+            }, 300);
+        }
+        
+        function attackPlayer1() {
+            if (gameState.player1.isAttacking || gameState.player1.isSpecialAttacking || gameState.player1.isJumping) return;
+            
+            gameState.player1.isAttacking = true;
+            player1Attack.style.opacity = '1';
+            player1Attack.style.left = '60px';
+            
+            const leftArm = player1Element.querySelector('.left-arm');
+            const rightArm = player1Element.querySelector('.right-arm');
+            
+            leftArm.style.transform = 'rotate(-30deg)';
+            rightArm.style.transform = 'rotate(30deg)';
+            
+            const player2Pos = parseInt(player2Element.style.left || (gameArena.offsetWidth - 210) + 'px');
+            const distance = Math.abs(gameState.player1.position - player2Pos);
+            
+            if (distance < 100) {
+                const damage = Math.floor(Math.random() * 10) + 5;
+                updateHealth('player2', damage);
+                
+                player2Hit.style.opacity = '1';
+                setTimeout(() => {
+                    player2Hit.style.opacity = '0';
+                }, 200);
+                
+                const knockback = Math.min(50, gameArena.offsetWidth - 60 - player2Pos);
+                player2Element.style.left = (player2Pos + knockback) + 'px';
+                gameState.player2.position = player2Pos + knockback;
+            }
+            
+            setTimeout(() => {
+                player1Attack.style.opacity = '0';
+                leftArm.style.transform = 'rotate(0deg)';
+                rightArm.style.transform = 'rotate(0deg)';
+                gameState.player1.isAttacking = false;
+            }, 300);
+        }
+        
+        function specialAttackPlayer1() {
+            if (gameState.player1.energy < 30 || gameState.player1.isAttacking || gameState.player1.isSpecialAttacking || gameState.player1.isJumping) return;
+            
+            gameState.player1.isSpecialAttacking = true;
+            gameState.player1.energy -= 30;
+            updateEnergyBar('player1');
+            
+            player1Special.style.opacity = '1';
+            player1Special.style.left = '60px';
+            
+            const leftArm = player1Element.querySelector('.left-arm');
+            const rightArm = player1Element.querySelector('.right-arm');
+            
+            leftArm.style.transform = 'rotate(-60deg)';
+            rightArm.style.transform = 'rotate(60deg)';
+            
+            const player2Pos = parseInt(player2Element.style.left || (gameArena.offsetWidth - 210) + 'px');
+            const distance = Math.abs(gameState.player1.position - player2Pos);
+            
+            if (distance < 150) {
+                const damage = Math.floor(Math.random() * 15) + 10;
+                updateHealth('player2', damage);
+                
+                player2Hit.style.opacity = '1';
+                setTimeout(() => {
+                    player2Hit.style.opacity = '0';
+                }, 200);
+                
+                const knockback = Math.min(80, gameArena.offsetWidth - 60 - player2Pos);
+                player2Element.style.left = (player2Pos + knockback) + 'px';
+                gameState.player2.position = player2Pos + knockback;
+            }
+            
+            setTimeout(() => {
+                player1Special.style.opacity = '0';
+                leftArm.style.transform = 'rotate(0deg)';
+                rightArm.style.transform = 'rotate(0deg)';
+                gameState.player1.isSpecialAttacking = false;
+            }, 500);
+        }
+        
+        // Player 2 functions
+        function movePlayer2(direction) {
+            if (gameState.player2.isAttacking || gameState.player2.isSpecialAttacking) return;
+            
+            const currentPos = parseInt(player2Element.style.left || (gameArena.offsetWidth - 210) + 'px');
+            const newPos = direction === 'left' ? Math.max(0, currentPos - 20) : Math.min(gameArena.offsetWidth - 60, currentPos + 20);
+            
+            player2Element.style.left = newPos + 'px';
+            gameState.player2.position = newPos;
+            
+            checkPlatform('player2');
+            checkPlayerDirection();
+        }
+        
+        function jumpPlayer2() {
+            if (gameState.player2.isJumping || gameState.player2.isAttacking || gameState.player2.isSpecialAttacking) return;
+            
+            gameState.player2.isJumping = true;
+            player2Element.style.bottom = '180px';
+            
+            player2Jump.style.opacity = '1';
+            setTimeout(() => {
+                player2Jump.style.opacity = '0';
+            }, 300);
+            
+            setTimeout(() => {
+                player2Element.style.bottom = '80px';
+                setTimeout(() => {
+                    gameState.player2.isJumping = false;
+                    checkPlatform('player2');
+                }, 300);
+            }, 300);
+        }
+        
+        function attackPlayer2() {
+            if (gameState.player2.isAttacking || gameState.player2.isSpecialAttacking || gameState.player2.isJumping) return;
+            
+            gameState.player2.isAttacking = true;
+            player2Attack.style.opacity = '1';
+            player2Attack.style.right = '60px';
+            
+            const leftArm = player2Element.querySelector('.left-arm');
+            const rightArm = player2Element.querySelector('.right-arm');
+            
+            leftArm.style.transform = 'rotate(-30deg)';
+            rightArm.style.transform = 'rotate(30deg)';
+            
+            const player1Pos = parseInt(player1Element.style.left || '150px');
+            const distance = Math.abs(gameState.player2.position - player1Pos);
+            
+            if (distance < 100) {
+                const damage = Math.floor(Math.random() * 10) + 5;
+                updateHealth('player1', damage);
+                
+                player1Hit.style.opacity = '1';
+                setTimeout(() => {
+                    player1Hit.style.opacity = '0';
+                }, 200);
+                
+                const knockback = Math.min(50, player1Pos);
+                player1Element.style.left = (player1Pos - knockback) + 'px';
+                gameState.player1.position = player1Pos - knockback;
+            }
+            
+            setTimeout(() => {
+                player2Attack.style.opacity = '0';
+                leftArm.style.transform = 'rotate(0deg)';
+                rightArm.style.transform = 'rotate(0deg)';
+                gameState.player2.isAttacking = false;
+            }, 300);
+        }
+        
+        function specialAttackPlayer2() {
+            if (gameState.player2.energy < 30 || gameState.player2.isAttacking || gameState.player2.isSpecialAttacking || gameState.player2.isJumping) return;
+            
+            gameState.player2.isSpecialAttacking = true;
+            gameState.player2.energy -= 30;
+            updateEnergyBar('player2');
+            
+            player2Special.style.opacity = '1';
+            player2Special.style.right = '60px';
+            
+            const leftArm = player2Element.querySelector('.left-arm');
+            const rightArm = player2Element.querySelector('.right-arm');
+            
+            leftArm.style.transform = 'rotate(-60deg)';
+            rightArm.style.transform = 'rotate(60deg)';
+            
+            const player1Pos = parseInt(player1Element.style.left || '150px');
+            const distance = Math.abs(gameState.player2.position - player1Pos);
+            
+            if (distance < 150) {
+                const damage = Math.floor(Math.random() * 15) + 10;
+                updateHealth('player1', damage);
+                
+                player1Hit.style.opacity = '1';
+                setTimeout(() => {
+                    player1Hit.style.opacity = '0';
+                }, 200);
+                
+                const knockback = Math.min(80, player1Pos);
+                player1Element.style.left = (player1Pos - knockback) + 'px';
+                gameState.player1.position = player1Pos - knockback;
+            }
+            
+            setTimeout(() => {
+                player2Special.style.opacity = '0';
+                leftArm.style.transform = 'rotate(0deg)';
+                rightArm.style.transform = 'rotate(0deg)';
+                gameState.player2.isSpecialAttacking = false;
+            }, 500);
+        }
+        
+        // AI functions
+        function startAI() {
+            aiInterval = setInterval(() => {
+                if (!gameState.gameActive) return;
+                
+                aiLogic();
+            }, aiSpeed);
+        }
+        
+        function aiLogic() {
+            const player1Pos = gameState.player1.position;
+            const player2Pos = gameState.player2.position;
+            const distance = Math.abs(player1Pos - player2Pos);
+            
+            // Decide action based on distance and aggression
+            const actionChance = Math.random();
+            
+            if (distance > 150 && actionChance < aiAggression) {
+                // Move towards player
+                if (player2Pos > player1Pos) {
+                    moveAI('left');
+                } else {
+                    moveAI('right');
+                }
+            } else if (distance < 80 && actionChance < 0.7) {
+                // Move away to maintain distance
+                if (player2Pos > player1Pos) {
+                    moveAI('right');
+                } else {
+                    moveAI('left');
+                }
+            } else if (distance < 120 && actionChance < aiAggression * 1.5) {
+                // Attack
+                if (gameState.player2.energy >= 30 && actionChance < 0.4) {
+                    specialAttackAI();
+                } else {
+                    attackAI();
+                }
+            } else if (actionChance < 0.3) {
+                // Jump randomly
+                jumpAI();
+            }
+        }
+        
+        function moveAI(direction) {
+            if (gameState.player2.isAttacking || gameState.player2.isSpecialAttacking) return;
+            
+            const currentPos = parseInt(player2Element.style.left || (gameArena.offsetWidth - 210) + 'px');
+            const newPos = direction === 'left' ? Math.max(0, currentPos - 25) : Math.min(gameArena.offsetWidth - 60, currentPos + 25);
+            
+            player2Element.style.left = newPos + 'px';
+            gameState.player2.position = newPos;
+            
+            checkPlatform('player2');
+            checkPlayerDirection();
+        }
+        
+        function jumpAI() {
+            if (gameState.player2.isJumping || gameState.player2.isAttacking || gameState.player2.isSpecialAttacking) return;
+            
+            gameState.player2.isJumping = true;
+            player2Element.style.bottom = '180px';
+            
+            player2Jump.style.opacity = '1';
+            setTimeout(() => {
+                player2Jump.style.opacity = '0';
+            }, 300);
+            
+            setTimeout(() => {
+                player2Element.style.bottom = '80px';
+                setTimeout(() => {
+                    gameState.player2.isJumping = false;
+                    checkPlatform('player2');
+                }, 300);
+            }, 300);
+        }
+        
+        function attackAI() {
+            if (gameState.player2.isAttacking || gameState.player2.isSpecialAttacking || gameState.player2.isJumping) return;
+            
+            gameState.player2.isAttacking = true;
+            player2Attack.style.opacity = '1';
+            player2Attack.style.right = '60px';
+            
+            const leftArm = player2Element.querySelector('.left-arm');
+            const rightArm = player2Element.querySelector('.right-arm');
+            
+            leftArm.style.transform = 'rotate(-30deg)';
+            rightArm.style.transform = 'rotate(30deg)';
+            
+            const player1Pos = parseInt(player1Element.style.left || '150px');
+            const distance = Math.abs(gameState.player2.position - player1Pos);
+            
+            if (distance < 100) {
+                const damage = Math.floor((Math.random() * 10 + 5) * aiDamageMultiplier);
+                updateHealth('player1', damage);
+                
+                player1Hit.style.opacity = '1';
+                setTimeout(() => {
+                    player1Hit.style.opacity = '0';
+                }, 200);
+                
+                const knockback = Math.min(50, player1Pos);
+                player1Element.style.left = (player1Pos - knockback) + 'px';
+                gameState.player1.position = player1Pos - knockback;
+            }
+            
+            setTimeout(() => {
+                player2Attack.style.opacity = '0';
+                leftArm.style.transform = 'rotate(0deg)';
+                rightArm.style.transform = 'rotate(0deg)';
+                gameState.player2.isAttacking = false;
+            }, 300);
+        }
+        
+        function specialAttackAI() {
+            if (gameState.player2.energy < 30 || gameState.player2.isAttacking || gameState.player2.isSpecialAttacking || gameState.player2.isJumping) return;
+            
+            gameState.player2.isSpecialAttacking = true;
+            gameState.player2.energy -= 30;
+            updateEnergyBar('player2');
+            
+            player2Special.style.opacity = '1';
+            player2Special.style.right = '60px';
+            
+            const leftArm = player2Element.querySelector('.left-arm');
+            const rightArm = player2Element.querySelector('.right-arm');
+            
+            leftArm.style.transform = 'rotate(-60deg)';
+            rightArm.style.transform = 'rotate(60deg)';
+            
+            const player1Pos = parseInt(player1Element.style.left || '150px');
+            const distance = Math.abs(gameState.player2.position - player1Pos);
+            
+            if (distance < 150) {
+                const damage = Math.floor((Math.random() * 15 + 10) * aiDamageMultiplier);
+                updateHealth('player1', damage);
+                
+                player1Hit.style.opacity = '1';
+                setTimeout(() => {
+                    player1Hit.style.opacity = '0';
+                }, 200);
+                
+                const knockback = Math.min(80, player1Pos);
+                player1Element.style.left = (player1Pos - knockback) + 'px';
+                gameState.player1.position = player1Pos - knockback;
+            }
+            
+            setTimeout(() => {
+                player2Special.style.opacity = '0';
+                leftArm.style.transform = 'rotate(0deg)';
+                rightArm.style.transform = 'rotate(0deg)';
+                gameState.player2.isSpecialAttacking = false;
+            }, 500);
+        }
+        
+        // Check if player is on a platform
+        function checkPlatform(player) {
+            const playerElement = player === 'player1' ? player1Element : player2Element;
+            const playerPos = parseInt(playerElement.style.left);
+            const playerBottom = parseInt(playerElement.style.bottom || '80px');
+            
+            if (playerPos >= platform1.left && playerPos <= platform1.right && playerBottom <= platform1.top && playerBottom >= platform1.bottom - 50) {
+                playerElement.style.bottom = platform1.top + 'px';
+                if (player === 'player1') {
+                    gameState.player1.onPlatform = true;
+                } else {
+                    gameState.player2.onPlatform = true;
+                }
+                return;
+            }
+            
+            if (playerPos >= platform2.left && playerPos <= platform2.right && playerBottom <= platform2.top && playerBottom >= platform2.bottom - 50) {
+                playerElement.style.bottom = platform2.top + 'px';
+                if (player === 'player1') {
+                    gameState.player1.onPlatform = true;
+                } else {
+                    gameState.player2.onPlatform = true;
+                }
+                return;
+            }
+            
+            if (player === 'player1') {
+                gameState.player1.onPlatform = false;
+            } else {
+                gameState.player2.onPlatform = false;
+            }
+        }
+        
+        // Update health
+        function updateHealth(player, damage) {
+            if (player === 'player1') {
+                gameState.player1.health = Math.max(0, gameState.player1.health - damage);
+                player1HealthBar.style.width = gameState.player1.health + '%';
+                
+                if (gameState.player1.health <= 0) {
+                    if (gameMode === 'pve') {
+                        endGame('AI WARRIOR');
+                    } else {
+                        endGame('RED WARRIOR');
+                    }
+                }
+            } else {
+                gameState.player2.health = Math.max(0, gameState.player2.health - damage);
+                player2HealthBar.style.width = gameState.player2.health + '%';
+                
+                if (gameState.player2.health <= 0) {
+                    endGame('BLUE WARRIOR');
+                }
+            }
+        }
+        
+        // Update energy bar
+        function updateEnergyBar(player) {
+            if (player === 'player1') {
+                player1EnergyBar.style.width = gameState.player1.energy + '%';
+            } else {
+                player2EnergyBar.style.width = gameState.player2.energy + '%';
+            }
+        }
+        
+        // Regenerate energy over time
+        setInterval(() => {
+            if (gameState.gameActive) {
+                if (gameState.player1.energy < 100) {
+                    gameState.player1.energy = Math.min(100, gameState.player1.energy + 1);
+                    updateEnergyBar('player1');
+                }
+                
+                if (gameState.player2.energy < 100) {
+                    gameState.player2.energy = Math.min(100, gameState.player2.energy + 1);
+                    updateEnergyBar('player2');
+                }
+            }
+        }, 200);
+        
+        // Check player direction
+        function checkPlayerDirection() {
+            const player1Pos = gameState.player1.position;
+            const player2Pos = gameState.player2.position;
+            
+            if (player1Pos < player2Pos) {
+                player1Element.style.transform = 'scaleX(1)';
+                player2Element.style.transform = 'scaleX(-1)';
+            } else {
+                player1Element.style.transform = 'scaleX(-1)';
+                player2Element.style.transform = 'scaleX(1)';
+            }
+        }
+        
+        // End game
+        function endGame(winner) {
+            gameState.gameActive = false;
+            messageText.textContent = `${winner} WINS!`;
+            gameMessage.style.display = 'block';
+            
+            // Clear AI interval if in PvE mode
+            if (gameMode === 'pve' && aiInterval) {
+                clearInterval(aiInterval);
+            }
+        }
+        
+        // Restart game
+        restartBtn.addEventListener('click', () => {
+            gameState = {
+                player1: {
+                    health: 100,
+                    energy: 100,
+                    position: 150,
+                    isAttacking: false,
+                    isJumping: false,
+                    isSpecialAttacking: false,
+                    onPlatform: false
+                },
+                player2: {
+                    health: 100,
+                    energy: 100,
+                    position: gameArena.offsetWidth - 210,
+                    isAttacking: false,
+                    isJumping: false,
+                    isSpecialAttacking: false,
+                    onPlatform: false
+                },
+                gameActive: false,
+                countdown: 3
+            };
+            
+            player1Element.style.left = '150px';
+            player2Element.style.left = (gameArena.offsetWidth - 210) + 'px';
+            player1Element.style.bottom = '80px';
+            player2Element.style.bottom = '80px';
+            player1Element.style.transform = 'scaleX(1)';
+            player2Element.style.transform = 'scaleX(-1)';
+            player1HealthBar.style.width = '100%';
+            player2HealthBar.style.width = '100%';
+            player1EnergyBar.style.width = '100%';
+            player2EnergyBar.style.width = '100%';
+            player1Attack.style.opacity = '0';
+            player2Attack.style.opacity = '0';
+            player1Special.style.opacity = '0';
+            player2Special.style.opacity = '0';
+            player1Hit.style.opacity = '0';
+            player2Hit.style.opacity = '0';
+            player1Jump.style.opacity = '0';
+            player2Jump.style.opacity = '0';
+            
+            const arms = document.querySelectorAll('.arm');
+            arms.forEach(arm => {
+                arm.style.transform = 'rotate(0deg)';
+            });
+            
+            gameMessage.style.display = 'none';
+            
+            // Restart AI if in PvE mode
+            if (gameMode === 'pve') {
+                startCountdown();
+                startAI();
+            } else {
+                startCountdown();
+            }
+        });
+    </script>
 </body>
 </html>
-
+</body>
+</html>
